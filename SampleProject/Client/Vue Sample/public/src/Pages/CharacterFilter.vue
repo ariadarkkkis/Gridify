@@ -85,7 +85,7 @@ export default {
          count: null,
          query: null,
          firstName: "",
-         lastName: ""
+         lastName: "",
       };
    },
    methods: {
@@ -97,13 +97,13 @@ export default {
             this.query = `/api/Gridify/?Filter=firstName=*${this.firstName}`;
          }
          if (!this.firstName && this.lastName) {
-            this.query = `/api/Gridify/?Filter=${this.lastName}`;
+            this.query = `/api/Gridify/?Filter=lastName==${this.lastName}`;
          }
          if (this.firstName && this.lastName) {
             this.query = `/api/Gridify/?Filter=firstName=*${this.firstName},lastName==${this.lastName}`;
          }
          // Call data from Get method by axios (third party library)
-         axios.get(this.query).then(res => {
+         axios.get(this.query).then((res) => {
             this.items = res.data.items;
          });
       },
@@ -112,11 +112,11 @@ export default {
          this.lastName = "";
          this.firstName = "";
          this.getData();
-      }
+      },
    },
    mounted() {
       this.getData();
-   }
+   },
 };
 </script>
 
