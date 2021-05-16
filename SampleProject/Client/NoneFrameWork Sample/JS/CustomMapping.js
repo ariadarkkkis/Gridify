@@ -1,5 +1,5 @@
-const firstNameInput = document.getElementById('firstName');
-const ageLessThanInput = document.getElementById('ageLessThan');
+const addressInput = document.getElementById('address');
+const phoneNumberInput = document.getElementById('phoneNumber');
 const searchBtn = document.getElementById('searchBtn');
 const clearBtn = document.getElementById('clearBtn');
 const tableBody = document.getElementById('tableBody');
@@ -8,7 +8,7 @@ let queryParam = document.getElementById('queryParam')
 let query;
 
 // Fetiching No search Data
-query = proxy + '/api/Gridify'
+query = proxy + '/api/Gridify/CustomMapping'
 fetch(query)
     .then(response => response.json())
     .then(data => {
@@ -28,16 +28,17 @@ fetch(query)
 
 //Search Data with params
 function search() {
-    query = proxy + '/api/Gridify'
-    if (firstNameInput.value && !ageLessThanInput.value) {
-        query = proxy + `/api/Gridify/?Filter=firstName=*${firstNameInput.value}`;
+    
+    query = proxy + '/api/Gridify/CustomMapping'
+    if ( addressInput.value && !phoneNumberInput.value) {
+        query = proxy + `/api/Gridify/CustomMapping/?Filter=livingAddress=*${addressInput.value}`;
     }
-    if (!firstNameInput.value && ageLessThanInput.value) {
-        query = proxy + `/api/Gridify/?Filter=age<=${ageLessThanInput.value}`;
-    }
-    if (firstNameInput.value && ageLessThanInput.value) {
-        query = proxy + `/api/Gridify/?Filter=firstName=*${firstNameInput.value}|age<=${ageLessThanInput.value}`;
-    }
+     if (!addressInput.value && phoneNumberInput.value) {
+         query = proxy + `/api/Gridify/CustomMapping/?Filter=lastName=*${phoneNumberInput.value}`;
+     }
+     if (addressInput.value && phoneNumberInput.value) {
+         query = proxy + `/api/Gridify/CustomMapping/?Filter=livingAddress=*${addressInput.value},phone=*${phoneNumberInput.value}`;
+     }
     queryParam.innerHTML = 'query: ' + query;
 
     tableBody.innerHTML = ''
@@ -62,7 +63,7 @@ function search() {
 
 // No Search param
 function noSearchParam() {
-    query = proxy + '/api/Gridify'
+    query = proxy + '/api/Gridify/CustomMapping'
     queryParam.innerHTML = 'query: ' + query;
     tableBody.innerHTML = ''
     fetch(query)
@@ -89,8 +90,8 @@ function noSearchParam() {
 
 // Clear Input values    
 function clear() {
-    firstNameInput.value = '';
-    ageLessThanInput.value = '';
+    addressInput.value = '';
+    phoneNumberInput.value = '';
     noSearchParam();
 }
 queryParam.innerHTML = 'query: ' + query;
