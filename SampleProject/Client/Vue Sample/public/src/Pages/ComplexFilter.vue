@@ -99,7 +99,7 @@ export default {
             this.query = `/api/Gridify?Filter=age<=${this.ageLessThan}`;
          }
          if (this.firstName && this.ageLessThan) {
-            this.query = `/api/Gridify?Filter= firstName=*${this.firstName}&age<=${this.ageLessThan}`;
+            this.query = `/api/Gridify?Filter= firstName=*${this.firstName}|age<=${this.ageLessThan}`;
          }
          // Call data from Get method by axios (third party library)
          axios.get(this.query).then(res => {

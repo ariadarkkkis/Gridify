@@ -87,3 +87,17 @@
 .sidenav a {
    font-size: 16px;
 }
+.pagination {
+   display: block !important;
+   align-items: center;
+   text-align: center;
+}
+.pagination span {
+   margin: 0.5rem;
+   color: blue;
+   font-size: 17px;
+   cursor: pointer;
+}
+.pagination span:hover {
+   border-bottom: 1px solid blue;
+}
